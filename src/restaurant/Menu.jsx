@@ -1,5 +1,5 @@
 import React from 'react';
-import { restaurantData } from '../../data/data';
+import { restaurantData } from '../data/data';
 
 const Menu = () => {
   const { menu } = restaurantData;
