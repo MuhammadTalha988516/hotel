@@ -1,5 +1,5 @@
 import { Room, Service, Facility, RestaurantItem, ContactInfo, HomeData } from '../models/index.js';
-import { roomsData, homeData, aboutData, restaurantData, facilitiesData, contactData } from '../data/data.js';
+import { Room as roomsData, homeData, aboutData, restaurantData, facilitiesData, contactData } from '../data/data.js';
 
 export class RoomController {
   static getAllRooms() {

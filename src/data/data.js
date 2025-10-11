@@ -1,47 +1,57 @@
-export const roomsData = [
-  {
-    id: 1,
-    type: 'Single Room',
-    price: 100,
-    description: 'A cozy room perfect for solo travelers featuring modern amenities and comfortable bedding.',
-    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
-  },
-  {
-    id: 2,
-    type: 'Double Room',
-    price: 150,
-    description: 'A spacious room with a double bed, perfect for couples or business travelers.',
-    image: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&q=80',
-  },
-  {
-    id: 3,
-    type: 'Suite',
-    price: 250,
-    description: 'A luxurious suite with a separate living area, premium amenities, and stunning views.',
-    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80',
-  },
-  {
-    id: 4,
-    type: 'Deluxe Suite',
-    price: 350,
-    description: 'Our most luxurious accommodation featuring premium furnishings, jacuzzi, and panoramic city views.',
-    image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80',
-  },
-  {
-    id: 5,
-    type: 'Executive Room',
-    price: 200,
-    description: 'Designed for business travelers with workspace, high-speed internet, and modern conveniences.',
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
-  },
-  {
-    id: 6,
-    type: 'Family Room',
-    price: 300,
-    description: 'Spacious accommodation for families with multiple beds and child-friendly amenities.',
-    image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80',
-  },
-];
+export const Room = [
+    {
+      id: 1,
+      name: "Pearl Continental Hotel Lahore",
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+      rating: 9.2,
+      reviews: 3421,
+      location: "Mall Road, Lahore",
+      distance: "1.2 km from center",
+      price: 25000,
+      originalPrice: 32000,
+      facilities: ["Free WiFi", "Pool", "Spa", "Restaurant", "Parking"],
+      discount: 22
+    },
+    {
+      id: 2,
+      name: "Avari Hotel Lahore",
+      image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80",
+      rating: 8.8,
+      reviews: 2156,
+      location: "Mall Road, Lahore",
+      distance: "0.8 km from center",
+      price: 22000,
+      originalPrice: 28000,
+      facilities: ["Free WiFi", "Restaurant", "Gym", "AC"],
+      discount: 21
+    },
+    {
+      id: 3,
+      name: "Nishat Hotel Johar Town",
+      image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+      rating: 8.5,
+      reviews: 1876,
+      location: "Johar Town, Lahore",
+      distance: "5.2 km from center",
+      price: 15000,
+      originalPrice: 18500,
+      facilities: ["Free WiFi", "Restaurant", "Parking"],
+      discount: 19
+    },
+    {
+      id: 4,
+      name: "Luxus Grand Hotel",
+      image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&q=80",
+      rating: 9.0,
+      reviews: 2890,
+      location: "Gulberg III, Lahore",
+      distance: "3.5 km from center",
+      price: 18000,
+      originalPrice: 23000,
+      facilities: ["Free WiFi", "Pool", "Restaurant", "Gym", "Spa"],
+      discount: 22
+    }
+  ];
 
 export const homeData = {
   banner: {
