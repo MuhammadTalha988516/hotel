@@ -7,6 +7,13 @@ export const roomsData = [
     image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
   },
   {
+  id: 1,
+  name: "Free Wi-Fi",
+  description: "High-speed internet access in all rooms and lobby.",
+  image: "/images/wifi.jpg",
+  type: "wifi"
+  },
+  {
     id: 2,
     type: 'Double Room',
     price: 150,

@@ -95,7 +95,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero-container">
+    <div className="hero-container bg-black">
       <div 
         ref={heroRef}
         className="hero-background"
