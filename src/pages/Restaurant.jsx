@@ -61,7 +61,7 @@ const Restaurant = () => {
           <Menu />
         </div>
 
-        {/* Cart Summary Section */}
+        
         <div className="py-10 px-6 bg-gray-800">
           <CartSummary />
         </div>
