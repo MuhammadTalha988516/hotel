@@ -1,178 +1,86 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, ChevronDown, Calendar, Users } from 'lucide-react';
-
-
-gsap.registerPlugin(ScrollTrigger);
+import React from "react";
+import { Star, Award, Globe, Users, ArrowRight } from "lucide-react";
 
 const Hero = () => {
-  const heroRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const buttonRef = useRef(null);
-  const overlayRef = useRef(null);
-  const statsRef = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animated overlay entrance
-      gsap.from(overlayRef.current, {
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out'
-      });
-
-      // Title animation - split text effect
-      gsap.from(titleRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power4.out',
-        delay: 0.3
-      });
-
-      // Subtitle animation
-      gsap.from(subtitleRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.6
-      });
-
-      // Button animation with bounce
-      gsap.from(buttonRef.current, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'back.out(1.7)',
-        delay: 0.9
-      });
-
-      // Stats animation
-      statsRef.current?.forEach((stat, index) => {
-        gsap.from(stat, {
-          y: 30,
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          delay: 1.2 + index * 0.1
-        });
-      });
-
-      // Floating animation for sparkles
-      gsap.to('.sparkle', {
-        y: -20,
-        duration: 2,
-        ease: 'power1.inOut',
-        stagger: 0.3,
-        repeat: -1,
-        yoyo: true
-      });
-
-      // Parallax scroll effect
-      gsap.to(heroRef.current, {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        },
-        y: 200,
-        ease: 'none'
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
-  };
-
   return (
-    <div className="hero-container">
-      <div 
-        ref={heroRef}
-        className="hero-background"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80')`
-        }}
-      />
-      
-      <div ref={overlayRef} className="hero-overlay" />
-      
-      <div className="hero-content-wrapper">
-        <div className="sparkle sparkle-1">
-          <Sparkles size={24} color="#FFD700" />
-        </div>
-        <div className="sparkle sparkle-2">
-          <Sparkles size={32} color="#FFD700" />
-        </div>
-        <div className="sparkle sparkle-3">
-          <Sparkles size={20} color="#FFD700" />
-        </div>
+    <section className="relative min-h-screen flex items-center justify-center bg-slate-950 text-white overflow-hidden">
+      {/* === Background Lights === */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
+      <div className="absolute inset-0 opacity-25 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[28rem] h-[28rem] bg-emerald-500/40 rounded-full blur-3xl mix-blend-screen" />
+        <div className="absolute bottom-0 right-1/4 w-[25rem] h-[25rem] bg-cyan-500/40 rounded-full blur-3xl mix-blend-screen" />
+        <div className="absolute top-1/2 left-1/2 w-[20rem] h-[20rem] bg-violet-600/40 rounded-full blur-3xl mix-blend-screen" />
+      </div>
 
-        <div className="hero-content">
-          <h1 ref={titleRef} className="hero-title">
-            Experience Luxury
-            <span className="hero-title-accent"> Redefined</span>
-          </h1>
-          
-          <p ref={subtitleRef} className="hero-subtitle">
-            Immerse yourself in unparalleled comfort and elegance at our world-class hotel
-          </p>
-          
-          <button ref={buttonRef} className="hero-button" onClick={scrollToContent}>
-            <span>Discover Your Stay</span>
-            <ChevronDown className="button-icon" size={20} />
-          </button>
+      {/* === Main Content === */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 text-center">
+        <div className="flex flex-col items-center justify-center py-24 md:py-32 space-y-16 md:space-y-20">
 
-          <div className="hero-stats">
-            <div 
-              ref={el => statsRef.current[0] = el}
-              className="stat-item"
-            >
-              <Calendar size={24} />
-              <div>
-                <div className="stat-number">500+</div>
-                <div className="stat-label">Happy Guests</div>
-              </div>
-            </div>
-            
-            <div 
-              ref={el => statsRef.current[1] = el}
-              className="stat-item"
-            >
-              <Users size={24} />
-              <div>
-                <div className="stat-number">50+</div>
-                <div className="stat-label">Luxury Rooms</div>
-              </div>
-            </div>
-            
-            <div 
-              ref={el => statsRef.current[2] = el}
-              className="stat-item"
-            >
-              <Sparkles size={24} />
-              <div>
-                <div className="stat-number">5★</div>
-                <div className="stat-label">Rating</div>
-              </div>
-            </div>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/10 border border-emerald-400/30 backdrop-blur-sm shadow-sm">
+            <Award className="w-4 h-4 text-emerald-400" />
+            <span className="text-sm font-medium text-emerald-300 tracking-wide uppercase">
+              Welcome to Opulent Escapes
+            </span>
+            <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
           </div>
+
+          {/* Title & Subtitle */}
+          <div className="space-y-8 max-w-4xl mx-auto">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight">
+              <span className="block bg-gradient-to-r from-white via-emerald-200 to-cyan-200 bg-clip-text text-transparent mb-2">
+                Discover Timeless
+              </span>
+              <span className="block bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
+                Luxury & Comfort
+              </span>
+            </h1>
+
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-8">
+              Step into a world where every moment feels bespoke — refined elegance,
+              serene surroundings, and experiences crafted for those who expect more.
+            </p>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-6 pt-6">
+            <button className="group relative flex items-center justify-center gap-2 px-12 sm:px-14 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-xl font-semibold text-white shadow-lg hover:shadow-emerald-500/40 hover:scale-[1.04] hover:brightness-110 transition-all duration-300">
+              <span>Explore Destinations</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+
+            <button className="flex items-center justify-center px-10 sm:px-12 py-4 border border-white/20 bg-white/5 rounded-xl font-semibold text-white hover:bg-white/10 hover:border-white/30 hover:scale-[1.04] transition-all duration-300">
+              View Experiences
+            </button>
+          </div>
+
+          {/* Stats Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-10 pt-16 md:pt-20 max-w-5xl mx-auto">
+            {[
+              { icon: Users, value: "500+", label: "Happy Guests" },
+              { icon: Globe, value: "50+", label: "Luxury Resorts" },
+              { icon: Star, value: "5.0", label: "Guest Rating" },
+            ].map((stat, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="p-3 rounded-full bg-emerald-500/15 mb-3 shadow-inner">
+                  <stat.icon className="w-8 h-8 text-emerald-400" />
+                </div>
+                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-400 tracking-wide uppercase">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer Text */}
+          <p className="text-sm text-gray-500 pt-10 md:pt-12 max-w-xl mx-auto leading-relaxed">
+            Crafted with care for the modern traveler — experience serenity in every moment.
+          </p>
         </div>
       </div>
-
-      <div className="scroll-indicator" onClick={scrollToContent}>
-        <ChevronDown size={32} className="bounce-arrow" />
-      </div>
-    </div>
+    </section>
   );
 };
 

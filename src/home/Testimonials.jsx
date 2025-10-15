@@ -1,165 +1,107 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
-
-gsap.registerPlugin(ScrollTrigger);
+import React from "react";
 
 const Testimonials = () => {
-  const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-  const carouselRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const testimonials = [
     {
-      id: 1,
-      name: 'Sarah Johnson',
-      role: 'Business Executive',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80',
-      quote: 'An absolutely stunning experience! The attention to detail and exceptional service made our stay unforgettable. The rooms are luxurious and the staff goes above and beyond.',
-      rating: 5,
-      location: 'New York, USA'
+      name: "Sarah Johnson",
+      image:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
+      quote:
+        "The ambiance, the warmth, and the attention to detail made my stay absolutely perfect. I felt truly cared for every moment.",
     },
     {
-      id: 2,
-      name: 'Michael Chen',
-      role: 'Travel Blogger',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
-      quote: 'I\'ve stayed at countless hotels around the world, but this one stands out. The perfect blend of modern amenities and timeless elegance. Highly recommended!',
-      rating: 5,
-      location: 'Singapore'
+      name: "Michael Chen",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
+      quote:
+        "Peaceful, elegant, and incredibly comfortable. This place feels less like a hotel and more like a personal retreat.",
     },
     {
-      id: 3,
-      name: 'Emily Rodriguez',
-      role: 'Entrepreneur',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80',
-      quote: 'From the moment we arrived, we felt like royalty. The spa facilities are world-class and the restaurant serves the most exquisite cuisine. A true 5-star experience!',
-      rating: 5,
-      location: 'Barcelona, Spain'
+      name: "Emily Rodriguez",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80",
+      quote:
+        "Everything was flawless — the interiors, the hospitality, the vibe. I can't imagine staying anywhere else now.",
     },
-    {
-      id: 4,
-      name: 'David Thompson',
-      role: 'Photographer',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',
-      quote: 'The architecture and interior design are breathtaking. Every corner is Instagram-worthy! But beyond aesthetics, the comfort and hospitality are unmatched.',
-      rating: 5,
-      location: 'London, UK'
-    }
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(titleRef.current, {
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      });
-
-      gsap.from(carouselRef.current, {
-        scrollTrigger: {
-          trigger: carouselRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        },
-        y: 80,
-        opacity: 0,
-        duration: 1,
-        delay: 0.3,
-        ease: 'power3.out'
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const currentTestimonial = testimonials[currentIndex];
-
   return (
-    <div ref={sectionRef} className="testimonials-section">
-      <div className="testimonials-container">
-        <div ref={titleRef} className="testimonials-header">
-          <h2 className="testimonials-title">Guest Experiences</h2>
-          <p className="testimonials-subtitle">
-            Hear what our valued guests have to say about their stay
+    <section className="py-24 sm:py-28 lg:py-36 bg-black text-gray-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-20 lg:mb-24">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+            What Our Guests Say
+          </h2>
+          <p className="text-gray-400 max-w-3xl mx-auto text-lg sm:text-xl leading-relaxed">
+            Real voices. Genuine experiences. Discover what makes every stay
+            unforgettable.
           </p>
         </div>
 
-        <div ref={carouselRef} className="testimonials-carousel">
-          <button 
-            className="carousel-button carousel-button-prev"
-            onClick={prevTestimonial}
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft size={24} />
-          </button>
-
-          <div className="testimonial-card-main">
-            <div className="quote-icon-wrapper">
-              <Quote size={48} className="quote-icon" />
-            </div>
-
-            <div className="testimonial-rating">
-              {[...Array(currentTestimonial.rating)].map((_, i) => (
-                <Star key={i} size={20} fill="#FFD700" color="#FFD700" />
-              ))}
-            </div>
-
-            <p className="testimonial-quote">
-              "{currentTestimonial.quote}"
-            </p>
-
-            <div className="testimonial-author">
-              <img 
-                src={currentTestimonial.image} 
-                alt={currentTestimonial.name}
-                className="author-image"
-              />
-              <div className="author-info">
-                <h4 className="author-name">{currentTestimonial.name}</h4>
-                <p className="author-role">{currentTestimonial.role}</p>
-                <p className="author-location">{currentTestimonial.location}</p>
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 mb-20 lg:mb-24">
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className="group bg-neutral-900 border border-neutral-800 rounded-2xl p-8 backdrop-blur-sm hover:bg-neutral-800/50 hover:border-gray-700 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center"
+            >
+              <div className="relative mb-6">
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-20 h-20 rounded-full object-cover border-2 border-emerald-400/30 group-hover:border-emerald-400/60 transition-colors duration-300"
+                />
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">✓</span>
+                </div>
+              </div>
+              
+              <p className="text-gray-300 italic leading-relaxed mb-6 text-base sm:text-lg">
+                "{t.quote}"
+              </p>
+              
+              <h4 className="text-white font-semibold text-lg group-hover:text-emerald-300 transition-colors duration-300">
+                {t.name}
+              </h4>
+              
+              {/* Rating Stars */}
+              <div className="flex items-center mt-3 space-x-1">
+                {[...Array(5)].map((_, starIndex) => (
+                  <svg
+                    key={starIndex}
+                    className="w-4 h-4 text-yellow-400 fill-current"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
               </div>
             </div>
-          </div>
-
-          <button 
-            className="carousel-button carousel-button-next"
-            onClick={nextTestimonial}
-            aria-label="Next testimonial"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
-
-        <div className="carousel-indicators">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              className={`indicator ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
           ))}
         </div>
+
+        {/* Bottom Stats */}
+        <div className="text-center">
+          <div className="inline-flex items-center gap-8 bg-neutral-900 border border-neutral-800 rounded-2xl px-8 py-6">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-white mb-1">1,200+</div>
+              <div className="text-sm text-gray-400">Happy Guests</div>
+            </div>
+            <div className="w-px h-12 bg-neutral-700"></div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-white mb-1">4.9</div>
+              <div className="text-sm text-gray-400">Average Rating</div>
+            </div>
+            <div className="w-px h-12 bg-neutral-700"></div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-white mb-1">98%</div>
+              <div className="text-sm text-gray-400">Satisfaction</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Hero from '../home/Hero';
 import Services from '../home/Services';
@@ -35,8 +36,11 @@ const Home = () => {
   return (
     <div className="home-page">
       <Hero />
+      <div className="py-8"></div>
       <Services />
+      <div className="py-8"></div>
       <FeaturedRooms />
+      <div className="py-8"></div>
       <Testimonials />
     </div>
   );
