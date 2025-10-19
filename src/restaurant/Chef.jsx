@@ -59,6 +59,7 @@ const Chef = () => {
           kitchens around the world. His philosophy blends artistry with
           authentic flavor — transforming every plate into a masterpiece.
         </p>
+        <br /><br />
       </div>
     </div>
   );

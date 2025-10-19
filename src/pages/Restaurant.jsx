@@ -36,7 +36,7 @@ const Restaurant = () => {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative h-[90vh] flex items-center justify-center overflow-hidden"
+          className="relative h-[85vh] flex items-center justify-center overflow-hidden"
         >
           <img
             src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80"
@@ -48,33 +48,44 @@ const Restaurant = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-300 bg-clip-text text-transparent">
               Flavors For You
             </h1>
-            <p className="text-lg md:text-xl text-white-200 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
               A luxurious dining experience blending art, taste, and ambiance —
-              where every plate tells a story of passion and perfection,
-              crafted to delight all your senses.
+              where every plate tells a story of passion and perfection.
             </p>
           </div>
         </section>
 
         {/* Menu Section */}
-        <div className="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
+        <div className="py-12 px-6 bg-gradient-to-b from-black to-gray-900">
           <Menu />
         </div>
 
-        
+        {/* Small space */}
+        <div className="h-6 bg-black" />
+
+        {/* Cart Summary Section */}
         <div className="py-10 px-6 bg-gray-800">
           <CartSummary />
         </div>
 
+        {/* Small space */}
+        <div className="h-6 bg-black" />
+
         {/* Chef Section */}
-        <div className="py-20 px-6 bg-black">
+        <div className="py-12 px-6 bg-black">
           <Chef />
         </div>
 
+        {/* Small space */}
+        <div className="h-6 bg-black" />
+
         {/* Reservations Section */}
-        <div className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
+        <div className="py-12 px-6 bg-gradient-to-b from-gray-900 to-black">
           <Reservations />
         </div>
+
+        {/* ✅ Space below Reservations */}
+        <div className="h-10 bg-black" />
       </div>
     </CartProvider>
   );
