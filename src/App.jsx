@@ -12,6 +12,8 @@ import Restaurant from './pages/Restaurant';
 import ContactUs from './pages/ContactUs';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
+import HotelLogin from './pages/HotelLogin';
+import HotelSignup from './pages/HotelSignup';
 import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
@@ -27,18 +29,20 @@ function App() {
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/contact" element={<ContactUs />} />
-        <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-          </Routes>
-        </main>
-        <Footer />
-      </Router>
-    </AuthProvider>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/hotel/login" element={<HotelLogin />} />
+          <Route path="/hotel/signup" element={<HotelSignup />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
+  </AuthProvider>
   );
 }
 

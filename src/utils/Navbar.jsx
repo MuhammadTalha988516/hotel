@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Menu, X, User, LogOut, Settings, Shield } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield, ChevronDown, Building2, User2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -36,24 +36,25 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group">
             <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-emerald-600 via-cyan-600 to-violet-600 bg-clip-text text-transparent">
               LuxeStay
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation (centred) */}
-          <div className="hidden lg:flex items-center justify-center gap-4 space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            {navItems.map((item) => (
-              <a
-                key={item.path}
-                href={item.path}
-                className="relative px-4 py-2 font-medium text-sm tracking-wide text-gray-700 hover:text-emerald-600 transition-all duration-300 group"
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+          <div className="hidden lg:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+            <div className="flex items-center gap-1 rounded-full bg-gray-50 p-1 border border-gray-200">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-emerald-600 hover:bg-white transition-all"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Right Side Buttons */}
@@ -118,21 +119,37 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="px-5 py-2.5 rounded-lg font-medium text-sm text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition-all duration-300"
-                >
-                  Sign In
-                </Link>
+              <div className="flex items-center gap-2">
+                {/* Sign In dropdown */}
+                <div className="relative group">
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    Sign In <ChevronDown className="w-4 h-4" />
+                  </button>
+                  <div className="absolute right-0 mt-2 w-56 bg-white/95 backdrop-blur border border-gray-100 shadow-xl rounded-xl p-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition">
+                    <Link to="/login" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-700 text-sm">
+                      <User2 className="w-4 h-4 text-emerald-600" /> Guest Sign In
+                    </Link>
+                    <Link to="/hotel/login" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-700 text-sm">
+                      <Building2 className="w-4 h-4 text-cyan-600" /> Hotel Sign In
+                    </Link>
+                  </div>
+                </div>
 
-                <Link
-                  to="/signup"
-                  className="px-5 py-2.5 border-2 rounded-lg font-medium text-sm border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300 hover:scale-105"
-                >
-                  Sign Up
-                </Link>
-              </>
+                {/* Create Account dropdown */}
+                <div className="relative group">
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white text-sm font-semibold shadow-sm hover:shadow-md">
+                    Create Account <ChevronDown className="w-4 h-4" />
+                  </button>
+                  <div className="absolute right-0 mt-2 w-60 bg-white/95 backdrop-blur border border-gray-100 shadow-xl rounded-xl p-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition">
+                    <Link to="/signup" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-700 text-sm">
+                      <User2 className="w-4 h-4 text-emerald-600" /> Guest Sign Up
+                    </Link>
+                    <Link to="/hotel/signup" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-700 text-sm">
+                      <Building2 className="w-4 h-4 text-cyan-600" /> Register Hotel
+                    </Link>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
 
@@ -206,21 +223,40 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link
-                    to="/login"
-                    onClick={() => setIsOpen(false)}
-                    className="block px-5 py-3.5 rounded-xl font-medium text-center text-gray-700 hover:bg-gray-100 transition-all duration-300"
-                  >
-                    Sign In
-                  </Link>
-
-                  <Link
-                    to="/signup"
-                    onClick={() => setIsOpen(false)}
-                    className="block px-5 py-3.5 border-2 rounded-xl font-medium text-center border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300"
-                  >
-                    Sign Up
-                  </Link>
+                  <div className="space-y-3">
+                    <div className="text-xs uppercase tracking-wide text-gray-400 px-2">Guest</div>
+                    <Link
+                      to="/login"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-5 py-3.5 rounded-xl font-medium text-center text-gray-700 hover:bg-gray-100 transition-colors"
+                    >
+                      Guest Sign In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-5 py-3.5 border-2 rounded-xl font-medium text-center border-emerald-500 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300"
+                    >
+                      Guest Sign Up
+                    </Link>
+                  </div>
+                  <div className="space-y-3 mt-4">
+                    <div className="text-xs uppercase tracking-wide text-gray-400 px-2">Hotel</div>
+                    <Link
+                      to="/hotel/login"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-5 py-3.5 rounded-xl font-medium text-center text-gray-700 hover:bg-gray-100 transition-colors"
+                    >
+                      Hotel Sign In
+                    </Link>
+                    <Link
+                      to="/hotel/signup"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-5 py-3.5 border-2 rounded-xl font-medium text-center border-cyan-500 text-cyan-600 hover:bg-cyan-500 hover:text-white transition-all duration-300"
+                    >
+                      Register Hotel
+                    </Link>
+                  </div>
                 </>
               )}
             </div>

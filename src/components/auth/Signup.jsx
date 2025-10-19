@@ -8,8 +8,12 @@ const Signup = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    passportNumber: '',
+    phone: '',
+    address: { street: '', city: '', state: '', zipCode: '', country: '' },
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,10 +24,13 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    if (name.startsWith('address.')) {
+      const key = name.split('.')[1];
+      setFormData((prev) => ({ ...prev, address: { ...prev.address, [key]: value } }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
     setError('');
   };
 
@@ -53,20 +60,34 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setLoading(true);
     setError('');
 
-    const result = await signup(formData.name, formData.email, formData.password);
-    
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      passportNumber: formData.passportNumber || undefined,
+      phone: formData.phone || undefined,
+      address: {
+        street: formData.address.street || undefined,
+        city: formData.address.city || undefined,
+        state: formData.address.state || undefined,
+        zipCode: formData.address.zipCode || undefined,
+        country: formData.address.country || undefined,
+      },
+    };
+    const result = await signup(payload);
+
     if (result.success) {
       navigate('/dashboard');
     } else {
       setError(result.error || 'Signup failed. Please try again.');
     }
-    
+
     setLoading(false);
   };
 
@@ -101,6 +122,43 @@ const Signup = () => {
                 {error}
               </div>
             )}
+
+            {/* Professional Details */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Passport Number</label>
+                <input
+                  type="text"
+                  name="passportNumber"
+                  value={formData.passportNumber}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                  placeholder="e.g., AB1234567"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                  placeholder="+1 555 000 0000"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Address</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="address.street" value={formData.address.street} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none" placeholder="Street" />
+                <input type="text" name="address.city" value={formData.address.city} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none" placeholder="City" />
+                <input type="text" name="address.state" value={formData.address.state} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none" placeholder="State" />
+                <input type="text" name="address.zipCode" value={formData.address.zipCode} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none" placeholder="ZIP Code" />
+                <input type="text" name="address.country" value={formData.address.country} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none md:col-span-2" placeholder="Country" />
+              </div>
+            </div>
 
             {/* Name Field */}
             <div>
