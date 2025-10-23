@@ -1,13 +1,76 @@
-import {
-  RoomController,
-  HomeController,
-  AboutController,
-  RestaurantController,
-  FacilitiesController,
-  ContactController
-} from '../controllers/index.js';
+const API_BASE_URL = 'http://localhost:5000/api';
 
 export class ApiService {
+  // Auth methods
+  static async login(email, password) {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    return response.json();
+  }
+
+  static async register(userData) {
+    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData)
+    });
+    return response.json();
+  }
+
+  static async getCurrentUser(token) {
+    const response = await fetch(`${API_BASE_URL}/auth/me`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    return response.json();
+  }
+
+  // Hotel Auth methods
+  static async hotelLogin(email, password) {
+    const response = await fetch(`${API_BASE_URL}/hotel-auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    return response.json();
+  }
+
+  static async hotelRegister(hotelData) {
+    const response = await fetch(`${API_BASE_URL}/hotel-auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(hotelData)
+    });
+    return response.json();
+  }
+
+  // Booking methods
+  static async createBooking(bookingData, token) {
+    const response = await fetch(`${API_BASE_URL}/bookings`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(bookingData)
+    });
+    return response.json();
+  }
+
+  static async getUserBookings(token) {
+    const response = await fetch(`${API_BASE_URL}/bookings`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    return response.json();
+  }
+
+  // Other existing imports and methods
+  static async getAllRooms() {
+    const response = await fetch(`${API_BASE_URL}/rooms`);
+    return response.json();
+  }
   // Room services
   static async getAllRooms() {
     try {
